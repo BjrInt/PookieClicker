@@ -1,7 +1,9 @@
 {
+  "homepage": "https://github.com/BjrInt/PookieClicker",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "autoprefixer": "^10.2.4",
+    "gh-pages": "^3.1.0",
     "parcel-bundler": "^1.12.4",
     "postcss-modules": "^4.0.0",
     "react": "^17.0.1",
@@ -10,6 +12,8 @@
   },
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html --public-url /PookieClicker/",
+    "predeploy": "rm -rf dist && npm run build",
+    "deploy": "gh-pages -d dist"
   }
 }
