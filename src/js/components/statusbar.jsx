@@ -10,11 +10,11 @@ const Statusbar = props => {
             <div>
                 <div className="statbubble">
                     <i className="fas fa-hand-pointer" />
-                     +1
+                     +{props.pookiesPerClick}
                     </div>
                 <div className="statbubble">
                     <i className="fas fa-chart-line" />
-                    +0/s
+                    +{props.pookiesPerSecond}/s
                 </div>
             </div>
         </aside>

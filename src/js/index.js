@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import { getBuildingCost } from './helpers'
+import { getBuildingCost, getPookiesPerSecond, getPookiesPerClick } from './helpers'
 
 import Statusbar from './components/statusbar'
 import Buildings from './components/buildings'
@@ -58,11 +58,7 @@ class GameInterface extends Component {
         }
 
         setInterval(() => {
-            let pookiePerSecond = 0
-
-            for(let building of this.state.buildings){
-                pookiePerSecond += building.units * building.benefits
-            }
+            const pookiePerSecond = getPookiesPerSecond(this.state.buildings)
             
             this.setState({
                 pookieTotal: this.state.pookieTotal + pookiePerSecond,
@@ -72,12 +68,7 @@ class GameInterface extends Component {
     }
 
     clickPookie = () => {
-        let pookiePerClick = 1
-
-        for(let achievement of this.state.achievements){
-            if(this.state.pookieClicked >= achievement.pookieClicked)
-                pookiePerClick *= 2
-        }
+        const pookiePerClick = getPookiesPerClick(this.state.achievements, this.state.pookieClicked)
 
         this.setState({
             pookieClicked: this.state.pookieClicked +1,
@@ -102,9 +93,12 @@ class GameInterface extends Component {
     }
 
     render() {
+        const pookiesPerSecond = getPookiesPerSecond(this.state.buildings)
+        const pookiesPerClick = getPookiesPerClick(this.state.achievements, this.state.pookieClicked)
+
         return (
             <>
-                <Statusbar />
+                <Statusbar pookiesPerClick={pookiesPerClick} pookiesPerSecond={pookiesPerSecond} />
                 <Buildings buildings={this.state.buildings} pookieCurrent={this.state.pookieCurrent} buyBuilding={this.buyBuilding} />
                 <Clickzone pookieCurrent={this.state.pookieCurrent} clickPookie={this.clickPookie} />
                 <Achievements pookieClicked={this.state.pookieClicked} achievements={this.state.achievements} />
