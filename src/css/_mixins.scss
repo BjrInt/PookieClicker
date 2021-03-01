@@ -1,0 +1,13 @@
+@mixin title {
+    font-family: 'Anton';
+    text-transform: uppercase;
+}
+
+@mixin bubble($padding, $font-size, $display: inline-block){
+    background: $fgColor;
+    padding: $padding;
+    border-radius: 5px;
+    color: #060db3;
+    font-size: $font-size;
+    display: $display;
+}
